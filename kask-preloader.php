@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Kask Preloader
  * Description: Lightweight page preloader with a custom icon and background color.
- * Version:     1.1.0
+ * Version:     1.2.0
  * Author:      Kask Creativity
  * License:     GPL-2.0-or-later
  */
@@ -115,12 +115,10 @@ html:has(e-page-transition) #kask-preloader{display:none}
 		if ( 'settings_page_' . self::SLUG !== $hook ) return;
 
 		wp_enqueue_media();
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_register_script( 'kask-preloader-admin', false, [ 'jquery', 'wp-color-picker' ], '1.0.0', true );
+		wp_register_script( 'kask-preloader-admin', false, [ 'jquery' ], '1.2.0', true );
 		wp_enqueue_script( 'kask-preloader-admin' );
 		wp_add_inline_script( 'kask-preloader-admin', <<<JS
 jQuery(function($){
-	$('.kask-color').wpColorPicker();
 	var frame;
 	$('#kask-icon-select').on('click', function(e){
 		e.preventDefault();
@@ -175,7 +173,7 @@ JS
 			</tr>
 			<tr>
 				<th scope="row">Background color</th>
-				<td><input type="text" class="kask-color" name="<?php echo $n; ?>[bg]" value="<?php echo esc_attr( $o['bg'] ); ?>" data-default-color="#ffffff"></td>
+				<td><input type="color" name="<?php echo $n; ?>[bg]" value="<?php echo esc_attr( $o['bg'] ); ?>"></td>
 			</tr>
 		</table>
 		<?php submit_button( 'Save changes' ); ?>
